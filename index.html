@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>La Noche Estrellada</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Oscurecimiento -->
+
+    <div id="overlay"></div>
+
+    <!-- Partículas -->
+
+    <div id="particles"></div>
+
+    <!-- Escena -->
+
+    <main class="scene">
+        <div id="siteTitle">
+
+    <span>R</span>
+    <span>E</span>
+    <span>B</span>
+    <span>E</span>
+
+</div>
+
+        <!-- Fondo -->
+
+        <img
+            src="assets/background.webp"
+            id="background"
+            class="background"
+            draggable="false">
+
+        <!-- Luna -->
+
+        <img
+            src="assets/moon.png"
+            id="moon"
+            class="interactive floating glow"
+            data-poem="moon"
+            draggable="false">
+
+        <!-- Ballena -->
+
+        <img
+            src="assets/whale.png"
+            id="whale"
+            class="interactive floating whaleFloat glow"
+            data-poem="whale"
+            draggable="false">
+
+        <!-- Estrella 1 -->
+
+        <img
+            src="assets/star1.png"
+            id="star1"
+            class="interactive star glow"
+            data-poem="star1"
+            draggable="false">
+
+        <!-- Estrella 2 -->
+
+        <img
+            src="assets/star2.png"
+            id="star2"
+            class="interactive star glow"
+            data-poem="star2"
+            draggable="false">
+
+        <!-- Nebulosa https://chatgpt.com/share/6a3b0f6d-09dc-83e8-9dca-b680eb559efc -->
+
+        <img
+            src="assets/nebula.png"
+            id="nebula"
+            class="interactive nebula pulse glow"
+            data-poem="nebula"
+            draggable="false">
+           <div id="memoryButton">
+
+    <img
+        id="memoryImage"
+        src="assets/moonClouds.png"
+        alt="Recuerdo">
+
+</div>
+
+<div id="memoryMessage">
+
+    <span id="messageText"></span>
+
+</div>
+</div>
+
+    </main>
+
+    <!-- Panel -->
+
+    <aside id="panel">
+
+        <button id="closeBtn">
+
+            ✕
+
+        </button>
+
+        <section id="titleContainer">
+
+            <h1 id="poemTitle">
+
+                Título
+
+            </h1>
+
+        </section>
+
+        <section id="poemContainer">
+
+            <div id="poemText">
+
+            </div>
+
+        </section>
+
+    </aside>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
