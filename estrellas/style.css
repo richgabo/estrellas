@@ -1,0 +1,1057 @@
+/*======================================================
+VARIABLES
+======================================================*/
+
+:root{
+
+    --bg:#05060d;
+
+    --glass:rgba(255,255,255,.18);
+
+    --glassBorder:rgba(255,255,255,.35);
+
+    --shadow:0 20px 60px rgba(0,0,0,.45);
+
+    --transition:650ms cubic-bezier(.22,.61,.36,1);
+
+    --gold:#ffe28a;
+
+    --blue:#6ec8ff;
+
+    --white:#ffffff;
+
+}
+
+/*======================================================
+RESET
+======================================================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html,
+body{
+
+    width:100%;
+
+    height:100%;
+
+}
+
+body{
+
+    overflow:hidden;
+
+    background:var(--bg);
+
+    font-family:"Cormorant Garamond",serif;
+
+    cursor:default;
+
+    user-select:none;
+
+}
+
+/*======================================================
+ESCENA
+======================================================*/
+
+.scene{
+
+    position:relative;
+
+    width:100vw;
+
+    height:100vh;
+
+    overflow:hidden;
+
+}
+
+/*======================================================
+FONDO
+======================================================*/
+
+.background{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    transform-origin:center;
+
+    will-change:transform;
+
+    transition:
+
+        transform 1200ms cubic-bezier(.22,.61,.36,1),
+
+        filter 900ms ease;
+
+}
+
+/*======================================================
+OVERLAY
+======================================================*/
+
+#overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:80;
+
+    background:rgba(0,0,0,0);
+
+    backdrop-filter:blur(0px);
+
+    transition:700ms;
+
+    pointer-events:none;
+
+}
+
+#overlay.active{
+
+    background:rgba(0,0,0,.35);
+
+    backdrop-filter:blur(8px);
+
+    pointer-events:auto;
+
+}
+
+/*======================================================
+PARTÍCULAS
+======================================================*/
+
+#particles{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:2;
+
+    overflow:hidden;
+
+}
+
+.particle{
+
+    position:absolute;
+
+    width:3px;
+
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.45;
+
+    animation:particleFloat linear infinite;
+
+}
+
+/*======================================================
+ELEMENTOS INTERACTIVOS
+======================================================*/
+
+.interactive{
+
+    position:absolute;
+
+    z-index:20;
+
+    cursor:pointer;
+
+    transform-origin:center;
+
+    transition:
+
+        transform .45s ease,
+
+        filter .45s ease,
+
+        opacity .45s ease;
+
+}
+
+/*======================================================
+HOVER
+======================================================*/
+
+.interactive:hover{
+
+    transform:scale(1.08);
+
+    filter:
+
+        drop-shadow(0 0 12px rgba(255,255,255,.9))
+
+        drop-shadow(0 0 35px rgba(255,255,255,.6));
+
+}
+
+/*======================================================
+CUANDO HAY UNA SELECCIÓN
+======================================================*/
+
+body.focus .interactive{
+
+    opacity:.28;
+
+}
+
+.interactive.active{
+
+    opacity:1 !important;
+
+    z-index:60;
+
+    transform:scale(1.12);
+
+    filter:
+
+        drop-shadow(0 0 18px white)
+
+        drop-shadow(0 0 45px white)
+
+        drop-shadow(0 0 80px rgba(255,255,255,.9));
+
+}
+
+/*======================================================
+POSICIONES
+======================================================*/
+
+#moon{
+
+    width:320px;
+
+    top:4%;
+
+    right:4%;
+
+}
+
+#whale{
+
+    width:560px;
+
+    left:38%;
+
+    top:15%;
+
+}
+
+#star1{
+
+    width:380px;
+
+    left:9%;
+
+    top:5%;
+
+}
+
+#star2{
+
+    width:260px;
+
+    left:22%;
+
+    top:22%;
+
+}
+
+#nebula{
+
+    width:900px;
+
+    left:56%;
+
+    bottom:-2%;
+
+    opacity:.82;
+
+}
+
+/*======================================================
+GLOW
+======================================================*/
+
+.glow{
+
+    animation:glow 4s ease-in-out infinite;
+
+}
+
+/*======================================================
+ESTRELLAS
+======================================================*/
+
+.star{
+
+    animation:
+
+        twinkle 3s infinite,
+
+        rotateStar 18s linear infinite;
+
+}
+
+/*======================================================
+LUNA
+======================================================*/
+
+#moon{
+
+    filter:
+
+        drop-shadow(0 0 12px rgba(255,220,120,.55));
+
+}
+
+/*======================================================
+BALLENA
+======================================================*/
+
+#whale{
+
+    filter:
+
+        drop-shadow(0 0 18px rgba(120,190,255,.45));
+
+}
+
+/*======================================================
+NEBULOSA
+======================================================*/
+
+#nebula{
+
+    filter:
+
+        drop-shadow(0 0 35px rgba(120,220,255,.5));
+
+}
+/*======================================================
+ANIMACIONES
+======================================================*/
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-18px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+@keyframes whaleFloat{
+
+    0%{
+
+        transform:
+        translate(0,0)
+        rotate(0deg);
+
+    }
+
+    50%{
+
+        transform:
+        translate(-15px,-10px)
+        rotate(-2deg);
+
+    }
+
+    100%{
+
+        transform:
+        translate(0,0)
+        rotate(0deg);
+
+    }
+
+}
+
+@keyframes twinkle{
+
+    0%{
+
+        opacity:.45;
+
+        filter:
+        brightness(.9);
+
+    }
+
+    50%{
+
+        opacity:1;
+
+        filter:
+        brightness(1.8);
+
+    }
+
+    100%{
+
+        opacity:.45;
+
+    }
+
+}
+
+@keyframes rotateStar{
+
+    from{
+
+        rotate:0deg;
+
+    }
+
+    to{
+
+        rotate:360deg;
+
+    }
+
+}
+
+@keyframes glow{
+
+    0%{
+
+        filter:drop-shadow(0 0 8px rgba(255,255,255,.3));
+
+    }
+
+    50%{
+
+        filter:
+
+        drop-shadow(0 0 20px rgba(255,255,255,.8))
+
+        drop-shadow(0 0 45px rgba(255,255,255,.5));
+
+    }
+
+    100%{
+
+        filter:drop-shadow(0 0 8px rgba(255,255,255,.3));
+
+    }
+
+}
+
+@keyframes nebulaPulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+@keyframes particleFloat{
+
+    from{
+
+        transform:
+        translateY(110vh);
+
+    }
+
+    to{
+
+        transform:
+        translateY(-20vh);
+
+    }
+
+}
+
+/*======================================================
+CLASES DE ANIMACIÓN
+======================================================*/
+
+.floating{
+
+    animation:
+
+    float 6s ease-in-out infinite;
+
+}
+
+.whaleFloat{
+
+    animation:
+
+    whaleFloat 8s ease-in-out infinite;
+
+}
+
+.pulse{
+
+    animation:
+
+    nebulaPulse 7s ease-in-out infinite;
+
+}
+
+/*======================================================
+PANEL
+======================================================*/
+
+#panel{
+
+    position:fixed;
+
+    top:50%;
+
+    right:-700px;
+
+    transform:translateY(-50%);
+
+    width:560px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+    z-index:300;
+
+    transition:1s cubic-bezier(.22,.61,.36,1);
+
+}
+
+#panel.show{
+
+    right:50px;
+
+}
+
+/*======================================================
+BOTÓN
+======================================================*/
+
+#closeBtn{
+
+    position:absolute;
+
+    top:-18px;
+
+    right:-18px;
+
+    width:52px;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    z-index:99999;
+
+    transition:.35s;
+
+    box-shadow:
+
+    0 15px 30px rgba(0,0,0,.35);
+
+}
+
+#closeBtn:hover{
+
+    rotate:90deg;
+
+    scale:1.12;
+
+}
+
+/*======================================================
+CAJAS
+======================================================*/
+
+#titleContainer{
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(24px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    border-radius:30px;
+
+    padding:28px;
+
+    box-shadow:var(--shadow);
+
+}
+
+#poemContainer{
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(28px);
+
+    border:1px solid rgba(255,255,255,.22);
+
+    border-radius:30px;
+
+    padding:38px;
+
+    min-height:430px;
+
+    line-height:2.1;
+
+    overflow-y:auto;
+
+    box-shadow:var(--shadow);
+
+}
+
+#poemTitle{
+
+    text-align:center;
+
+    font-size:2.4rem;
+
+    font-style:italic;
+
+    color:white;
+
+}
+
+#poemText{
+
+    color:white;
+
+    font-size:1.15rem;
+
+}
+
+/*======================================================
+TEMAS
+======================================================*/
+
+.moonTheme #titleContainer{
+
+    background:#2a5ab8;
+
+    color:black;
+
+}
+
+.moonTheme #poemContainer{
+
+    background:#0e2552
+    
+
+}
+
+.whaleTheme #titleContainer{
+
+    background:#2a5ab8;
+
+}
+
+.whaleTheme #poemContainer{
+
+    background:#0e2552;
+
+}
+
+.starTheme #titleContainer{
+
+    background:#2a5ab8;
+
+}
+
+.starTheme #poemContainer{
+
+    background:#0e2552;
+
+}
+
+.nebulaTheme #titleContainer{
+
+    background:#2a5ab8;
+
+}
+
+.nebulaTheme #poemContainer{
+
+    background:#0e2552;
+
+}
+
+/*======================================================
+RESPONSIVE
+======================================================*/
+
+@media(max-width:900px){
+
+#panel{
+
+    width:92%;
+
+    right:-120%;
+
+}
+
+#panel.show{
+
+    right:4%;
+
+}
+
+#moon{
+
+    width:220px;
+
+}
+
+#whale{
+
+    width:360px;
+
+}
+
+#star1{
+
+    width:240px;
+
+}
+
+#star2{
+
+    width:180px;
+
+}
+
+#nebula{
+
+    width:650px;
+
+}
+
+}
+#memoryButton{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:280px;
+
+    z-index:250;
+
+    cursor:pointer;
+
+    transition:.6s;
+
+}
+
+#memoryButton:hover{
+
+    transform:
+    translate(-50%,-50%)
+    scale(1.05);
+
+}
+
+#memoryImage{
+
+    width:100%;
+
+    display:block;
+
+    filter:
+    drop-shadow(0 0 15px rgba(255,255,255,.3));
+
+    transition:1s;
+
+}
+
+#memoryButton.active #memoryImage{
+
+    transform:
+    translateX(20px)
+    scale(1.05);
+
+}
+
+#memoryMessage{
+
+    position:absolute;
+
+    left:50%;
+
+    top:calc(50% - 130px);
+
+    transform:translateX(-50%);
+
+    background:
+    rgba(13, 29, 54, 0.95);
+
+    padding:15px 25px;
+
+    border-radius:20px;
+
+    font-size:1.5rem;
+
+    opacity:0;
+
+    transition:.8s;
+
+    z-index:300;
+
+}
+
+#memoryMessage.show{
+
+    opacity:1;
+
+}
+#siteTitle{
+
+    position:absolute;
+
+    top:35px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:50; /* más bajo que el botón */
+
+    display:flex;
+
+    gap:8px;
+
+    pointer-events:none; /* MUY IMPORTANTE */
+
+}/* ======================================
+TITULO REBE
+====================================== */
+
+#siteTitle{
+
+    position:absolute;
+
+    top:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:100;
+
+    display:flex;
+
+    gap:8px;
+
+    pointer-events:none;
+
+}
+
+#siteTitle span{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:clamp(4rem,8vw,8rem);
+
+    font-weight:700;
+
+    letter-spacing:8px;
+
+    background:linear-gradient(
+        90deg,
+        #ffffff,
+        #ffe28a,
+        #6ec8ff,
+        #ffffff
+    );
+
+    background-size:300% 300%;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.5);
+
+    animation:
+        gradientMove 6s linear infinite,
+        titleFloat 6s ease-in-out infinite;
+
+}
+
+#siteTitle span:nth-child(1){
+    animation-delay:0s;
+}
+
+#siteTitle span:nth-child(2){
+    animation-delay:.3s;
+}
+
+#siteTitle span:nth-child(3){
+    animation-delay:.6s;
+}
+
+#siteTitle span:nth-child(4){
+    animation-delay:.9s;
+}
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    100%{
+        background-position:300% 50%;
+    }
+
+}
+
+@keyframes titleFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+/* ======================================
+BOTON ASTRONAUTA
+====================================== */
+
+#memoryButton{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:280px;
+
+    z-index:250;
+
+    cursor:pointer;
+
+}
+
+#memoryImage{
+
+    width:100%;
+
+    display:block;
+
+    transition:1s;
+
+    filter:
+    drop-shadow(0 0 20px rgba(255,255,255,.35));
+
+}
+
+#memoryMessage{
+
+    position:absolute;
+
+    left:50%;
+
+    top:calc(50% - 140px);
+
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,.92);
+
+    color:#111;
+
+    padding:16px 28px;
+
+    border-radius:25px;
+
+    font-size:1.4rem;
+
+    opacity:0;
+
+    transition:.8s;
+
+    z-index:260;
+
+    pointer-events:none;
+
+}
+
+#memoryMessage.show{
+
+    opacity:1;
+
+}
